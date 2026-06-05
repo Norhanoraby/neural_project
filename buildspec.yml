@@ -1,0 +1,25 @@
+version: 0.2
+
+# AWS CodeBuild recipe: builds the Lambda container image in the cloud and
+# pushes it to ECR. No local Docker or disk needed.
+#
+# Set these as environment variables in the CodeBuild project:
+#   AWS_REGION   e.g. us-east-1
+#   ACCOUNT_ID   e.g. 390866253313
+#   REPO         e.g. pneumonia-lambda
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Building the image...
+      - docker build -t $REPO .
+      - docker tag $REPO:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO:latest
+  post_build:
+    commands:
+      - echo Pushing image to ECR...
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO:latest
+      - echo Done. Image is in ECR.
