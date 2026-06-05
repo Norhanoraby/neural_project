@@ -8,7 +8,7 @@ ENV HF_HOME=${LAMBDA_TASK_ROOT}/hf_home
 
 # Install CPU-only PyTorch (smaller, no GPU needed) plus the other libraries.
 COPY requirements-lambda.txt .
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements-lambda.txt
 
 # Pre-download the model at build time so it's baked into the image.
