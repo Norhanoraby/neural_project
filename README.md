@@ -67,3 +67,6 @@ python main.py
 - This is a progress submission; some pieces are still being refined.
 - Trained `.pth` checkpoints and generated images are excluded via
   `.gitignore` to keep the repo light.
+
+  ## Deployment url
+  http://pneumonia-ui-390866253313.s3-website.eu-north-1.amazonaws.com/
