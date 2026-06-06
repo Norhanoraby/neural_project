@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Model checkpoints (too large for git)
+*.pth
+
+# Generated outputs
+*.png
+*.zip
+*.tar.gz
+/kaggle/working/
+
+# Data — do NOT commit the dataset; link it in the README instead
+*.csv
+data/
